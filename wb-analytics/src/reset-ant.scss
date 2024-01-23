@@ -1,0 +1,52 @@
+.ant-tabs-nav,
+.ant-progress {
+   margin: 0 !important;
+}
+
+.ant-btn-primary {
+   color: #fff;
+   background-color: #1677ff;
+   box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+}
+
+.ant-btn-default {
+   color: rgba(0, 0, 0, 0.88);
+   border-color: #d9d9d9;
+   background-color: #fff;
+   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top > .ant-tabs-nav::before,
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom > .ant-tabs-nav::before,
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top > div > .ant-tabs-nav::before,
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom > div > .ant-tabs-nav::before {
+   border-bottom: none;
+}
+
+.ant-tabs-nav-list {
+   flex-wrap: wrap;
+}
+
+.main__container {
+   :where(.css-dev-only-do-not-override-6j9yrn).ant-input-number-affix-wrapper
+      .ant-input-number-prefix,
+   :where(.css-dev-only-do-not-override-6j9yrn).ant-input-affix-wrapper .ant-input-prefix {
+      margin-inline-end: 0.75rem;
+   }
+
+   .ant-form-item-control-input .anticon {
+      font-size: 1.25rem;
+   }
+
+   :where(.css-dev-only-do-not-override-6j9yrn).ant-form-item .ant-form-item-explain-error {
+      color: white;
+   }
+}
+
+.ant-drawer-title {
+   font-size: 1.5rem !important;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-drawer .ant-drawer-header-title {
+   flex-direction: row-reverse;
+}

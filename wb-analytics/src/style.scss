@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+   max-width: 1600px;
+   margin: 0 auto;
+}
+
+html {
+   scroll-behavior: smooth; // плавный скролл
+}
+
+html,
+body {
+   margin: 0;
+   padding: 0;
+   background-color: #f6f8fb;
+   font-size: 16px;
+   font-family: "Roboto", sans-serif;
+   overflow-x: hidden;
+}
+
+.text-blue-color {
+   color: #1677ff;
+}
+
+.bg-blue-color {
+   background-color: #1677ff;
+}
+
+.text-4-5xl {
+   font-size: 2.75rem;
+}
+
+// adaptive
+
+.show-xs,
+.show-lg {
+   display: none;
+}
+
+@media screen and (max-width: 992px) {
+   html,
+   body {
+      font-size: 14px;
+   }
+
+   .show-lg {
+      display: block;
+   }
+
+   .hide-lg {
+      display: none;
+   }
+
+   .py-4-lg {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+   }
+
+   .select-for-table {
+      flex-grow: 1;
+   }
+}
+
+@media screen and (max-width: 576px) {
+   .show-xs {
+      display: block;
+   }
+
+   .hide-xs {
+      display: none;
+   }
+}

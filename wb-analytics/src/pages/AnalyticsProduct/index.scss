@@ -1,0 +1,54 @@
+.AnalyticsProduct {
+   overflow: hidden;
+
+   &__grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr) 14em;
+      grid-template-rows: repeat(2, 1fr);
+
+      @media screen and (max-width: 1200px) {
+         grid-template-columns: repeat(2, 1fr) 18em;
+         grid-template-rows: repeat(3, auto);
+      }
+
+      @media screen and (max-width: 992px) {
+         grid-template-columns: repeat(2, auto) 18em;
+         grid-template-rows: repeat(3, auto);
+      }
+
+      @media screen and (max-width: 768px) {
+         grid-template-columns: 1fr;
+         grid-template-rows: repeat(6, auto);
+      }
+
+      @media screen and (max-width: 576px) {
+         grid-template-rows: repeat(7, auto);
+      }
+   }
+   .AnalyticsProduct__image {
+      grid-column-start: 4;
+      grid-column-end: 5;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      align-self: flex-start;
+
+      @media screen and (max-width: 1200px) {
+         grid-column-start: 3;
+         grid-column-end: 4;
+         grid-row-end: 4;
+      }
+
+      @media screen and (max-width: 992px) {
+         grid-row-end: 4;
+      }
+
+      @media screen and (max-width: 768px) {
+         grid-column-start: 1;
+         grid-column-end: 2;
+         grid-row-start: 7;
+         grid-row-end: 8;
+         display: block;
+      }
+   }
+}

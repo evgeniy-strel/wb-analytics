@@ -1,0 +1,10 @@
+.radio {
+   transition: 0.2s;
+   cursor: pointer;
+   &.radio_active {
+      border-color: #1677ff;
+   }
+   &__icon {
+      color: #1677ff;
+   }
+}
