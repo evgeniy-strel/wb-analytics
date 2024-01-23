@@ -27,7 +27,7 @@ const TopProducts: React.FC = () => {
 
       const data = products
          .map((product: any) => {
-            const salesPerDay = Math.round(product.sells / 8);
+            const salesPerDay = Math.round(product.sells / 20);
 
             return {
                key: product.articul,

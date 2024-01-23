@@ -14,7 +14,7 @@ const TopProducts = ({ navigation }) => {
    const source = async (): Promise<any[]> => {
       const data = products
          .map((product: any) => {
-            const salesPerDay = Math.round(product.sells / 8);
+            const salesPerDay = Math.round(product.sells / 20);
             return [category, product.name, product.articul, product.cost / 100, salesPerDay];
          })
          .map((col: any) => convertToRubleFormat(col, [3]));
