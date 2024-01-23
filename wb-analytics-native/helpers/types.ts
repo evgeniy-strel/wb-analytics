@@ -29,7 +29,7 @@ export type TStorageScheme = "FBO" | "FBS" | "DBS";
 /* Поля калькулятора */
 export interface ICalculator {
    category: string | null;
-   subCategory: string | null;
+   subCategory: string | null | any;
    priceOnWB: number | null;
    costPrice: number | null;
    countGoods: number;

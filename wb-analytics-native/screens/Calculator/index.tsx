@@ -10,6 +10,10 @@ import { Slider as Slider2 } from "@rneui/themed";
 import Slider from "@react-native-community/slider";
 import IonIcons from "react-native-vector-icons/Ionicons";
 import Result from "./Result";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories, getSubCategories } from "../../store/selectors";
+import axios from "axios";
+import { setSubCategories } from "../../store/slices/screenSlice";
 
 const radioOptions: Array<IItem> = [
    {
@@ -31,76 +35,53 @@ export enum Taxes {
    incomeMinusExpenses = 13,
 }
 
-const categories = [
-   "Наконечники рулевой тяги",
-   "Элементы облицовки",
-   "Замковые устройства для автоприцепов",
-   "Головки соединительные",
-   "Противотуманные фары",
-   "Тросы подсоса",
-   "Накладки на ремень безопасности",
-   "Усилители тормоза",
-   "Бачки автомобильные",
-   "Модули управления центральным замком",
-   "Рейлинги",
-   "Полироли кузова",
-   "Ключи автомобильные",
-   "Подогреватели предпусковые",
-   "Катушки зажигания",
-   "Подвески пневматические",
-   "Блоки согласования фаркопов",
-   "Фильтры автомобильные",
-   "Указатели автомобильные",
-   "Составные части стойки амортизатора",
-   "Тормозные диски автомобильные",
-   "Шпиндели автомобильные",
-   "Линзы в фары",
-   "Накидки магнитные для авто",
-   "Составляющие эмульсионной трубки",
-   "Чехлы для водной техники",
-   "Утеплители радиатора",
-   "Сидения автомобильные",
-   "Направляющие клапана",
-   "Блоки управления",
-   "Блоки розжига ксенона",
-   "Лебедки для квадроциклов",
-   "Лобовые стекла",
-   "Ремкомплекты автомобильные",
-   "Элементы катушек зажигания",
-   "Зеркала дорожные",
-   "Фильтры охлаждающей жидкости",
-   "Ленты капота снегохода",
-   "Стояночные огни",
-   "Ремкомплекты для стекол",
-   "Конверторы для автомагнитол",
-   "Лопаты автомобильные",
-   "Накладки защитные автомобильные",
-   "Датчики износа тормозных колодок",
-   "Силовая защита картера",
-   "Регуляторы нагнетаемого воздуха",
-   "Антипробуксовочные приспособления",
-   "Рамки автомобильные",
-];
-
-const items = categories.map((name) => ({ value: name, label: name }));
-
 const getResult = (calculator: ICalculator): IResultCalculator => {
    return Calculator.calculateProfit(calculator);
 };
+
+const backURL = "https://79b4-31-162-87-187.ngrok-free.app";
 
 const CalculatorPage = ({ navigation }) => {
    const [calculator, setCalculator] = useState(Calculator.createObject());
    const [result, setResult] = useState(getResult(calculator));
 
-   const onChangeCategory = (item: string) => {
-      setCalculator({ ...calculator, category: item, subCategory: null });
+   const categories = useSelector(getCategories);
+   const subCategories = useSelector(getSubCategories);
+
+   const categoriesItems = categories.map((name: any) => ({ value: name, label: name }));
+   const subCategoryItems = subCategories.map((cat: any) => ({
+      value: cat.sub_category,
+      label: cat.sub_category,
+   }));
+
+   const dispatch = useDispatch();
+
+   const onChangeCategory = (item: any) => {
+      setCalculator({ ...calculator, category: item?.value, subCategory: null });
    };
 
-   const onChangeState = (field) => {
+   const onChangeSubCategory = (item: any) => {
+      const value = subCategories.find((x: any) => x.sub_category === item?.value);
+
+      setCalculator({ ...calculator, subCategory: value });
+   };
+
+   const onChangeState = (field: any) => {
       return (value: any) => {
          setCalculator({ ...calculator, [field]: value });
       };
    };
+
+   useEffect(() => {
+      console.log(calculator.category);
+
+      axios
+         .get(`${backURL}/calc/sub_cat_list?category=${calculator.category}`)
+         .then(({ data }: any) => {
+            dispatch(setSubCategories(data));
+         })
+         .catch(() => alert("Ошибка БД"));
+   }, [calculator.category]);
 
    useEffect(() => {
       setResult(getResult(calculator));
@@ -111,7 +92,7 @@ const CalculatorPage = ({ navigation }) => {
          <View>
             <View className="mb-3">
                <Dropdown
-                  items={items}
+                  items={categoriesItems}
                   caption="Категория"
                   placeholder=""
                   value={calculator.category}
@@ -120,11 +101,11 @@ const CalculatorPage = ({ navigation }) => {
             </View>
             <Dropdown
                disable={!calculator.category}
-               items={items}
-               value={calculator.subCategory}
+               items={subCategoryItems}
+               value={calculator.subCategory?.sub_category}
                placeholder=""
                caption="Подкатегория"
-               onChange={onChangeState("subCategory")}
+               onChange={onChangeSubCategory}
             />
             <View className="mt-3">
                <InputNumber

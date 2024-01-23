@@ -146,19 +146,6 @@ const TableProducts = ({ headerColumns, source, withoutSubCategories }: ITablePr
                      </TableComponent>
                   </View>
                </ScrollView>
-               <View className="flex flex-1 flex-row items-center justify-between">
-                  <Button size="small" onPress={onClickPrevPage} disabled={page === 1}>
-                     <IonIcons name="chevron-back-outline" />
-                     <Text>Предыдущая</Text>
-                  </Button>
-                  <Button size="small" appearance="outline" status="primary">
-                     {page}
-                  </Button>
-                  <Button size="small" onPress={onClickNextPage} disabled={page === 5}>
-                     <Text>Следующая</Text>
-                     <IonIcons name="chevron-forward-outline" />
-                  </Button>
-               </View>
             </View>
          </ScrollView>
       ) : (

@@ -29,7 +29,7 @@ export default class Calculator {
       }
 
       const litres = Calculator.calculateLitres(args.length!, args.width!, args.height!);
-      const percentCategoryComission = 0.1;
+      const percentCategoryComission = args.subCategory?.wb_commission / 100 || 0;
 
       result.wbComission = args.priceOnWB! * percentCategoryComission;
       result.storagePerMonth = args.storageScheme!.title === "FBO" ? this.storage * litres * 30 : 0;
@@ -67,7 +67,7 @@ export default class Calculator {
    static createObject() {
       return {
          category: "",
-         subCategory: "",
+         subCategory: null,
          priceOnWB: null,
          costPrice: null,
          countGoods: 1,

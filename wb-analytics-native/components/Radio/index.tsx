@@ -18,7 +18,6 @@ export interface IProps {
 
 const Radio = ({ item, selectedItem, onClick }: IProps) => {
    const isActive = selectedItem?.title === item.title;
-   console.log(isActive, item.title);
 
    if (isActive) {
       return (
